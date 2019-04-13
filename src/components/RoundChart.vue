@@ -9,31 +9,19 @@
 import echarts from 'echarts'
 
 export default {
-  name: 'Chart',
+  name: 'RoundChart',
   data () {
     return {
       option: {
         tooltip: {},
-        legend: {
-          data: ['服务端使用量', '客户端使用量', '合计量']
-        },
-        xAxis: {
-          data: ['3/8', '3/9', '3/10', '3/11', '3/12', '3/13']
-        },
-        yAxis: {},
-        series: [{
-          name: '服务端使用量',
-          type: 'line',
-          data: [5, 20, 36, 10, 10, 20]
-        }, {
-          name: '客户端使用量',
-          type: 'line',
-          data: [25, 80, 46, 10, 230, 120]
-        }, {
-          name: '合计量',
-          type: 'bar',
-          data: [30, 100, 82, 20, 240, 140]
-        }]
+        series: [
+          {
+            name: this.title,
+            type: 'gauge',
+            detail: {formatter: '{value}%'},
+            data: [{value: 40, name: this.title}]
+          }
+        ]
       }
     }
   },
@@ -57,12 +45,13 @@ export default {
   }
 
   #card {
-    height: 330px;
-    margin: 10px;
+    margin-top: 20px;
+    margin-right: 20px;
+    height: 500px;
   }
 
   .main {
     width: 96%;
-    height: 260px;
+    height: 380px;
   }
 </style>

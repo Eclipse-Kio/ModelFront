@@ -9,10 +9,11 @@ axios.interceptors.response.use(function (response) {
   return response
 }, function (error) {
   const res = error.response
-  if (res.status === 500) {
-    Message(res.status + '： ' + '服务器内部错误！')
-  } else if (res.status === 404) {
-    Message(res.status + '： ' + '找不到请求的资源！')
+  if (res.status !== 200) {
+    Message({
+      message: res.status + '： ' + res.statusText,
+      type: 'error'
+    })
   }
   return Promise.reject(error)
 })
@@ -21,16 +22,11 @@ export default function (url, data = {}, type = 'get') {
   return new Promise(function (resolve, reject) {
     let promise
     if (type !== 'post') {
-      let dataStr = ''
-      Object.keys(data).forEach(key => {
-        dataStr += key + '=' + data[key] + '&'
-      })
-      if (dataStr !== '') {
-        url += '?' + dataStr
+      if (data.length !== 0) {
+        url += '?' + qs.stringify(data)
       }
-      promise = axios.get(url)
+      promise = axios.get(url, qs.stringify(data))
     } else {
-      console.log(qs.stringify(data))
       promise = axios.post(url, qs.stringify(data))
     }
 

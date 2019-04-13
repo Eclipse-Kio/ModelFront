@@ -11,7 +11,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
+      '/': {
         target: 'http://localhost:8080',//vue访问后台服务的端口
         changeOrigin: true,
         pathRewrite: {

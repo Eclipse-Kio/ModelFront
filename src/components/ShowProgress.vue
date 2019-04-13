@@ -1,13 +1,13 @@
 <template>
   <el-card>
-    <div slot="header">
+    <div style="color: #ff4f4f;font-weight: bold" slot="header">
       <span>实时任务视图</span>
       <TaskCode :tskType="tskType"></TaskCode>
       <el-progress :percentage="$store.getters.getData[tskType-1].progress"></el-progress>
     </div>
     <div class="data">
-      <div :key="item" v-for="item in $store.getters.getData[tskType - 1].result">
-        <div>{{item}}</div>
+      <div :key="index" v-for="(item,index) in $store.getters.getData[tskType - 1].result">
+        <div v-html="item"></div>
       </div>
     </div>
   </el-card>
@@ -21,6 +21,19 @@ export default {
   components: {TaskCode},
   props: {
     tskType: Number
+  },
+  computed: {
+    length () {
+      return this.$store.getters.getData[this.tskType - 1].result
+    }
+  },
+  watch: {
+    length () {
+      this.$nextTick(() => {
+        let container = this.$el.querySelector('.data')
+        container.scrollTop = container.scrollHeight
+      })
+    }
   }
 }
 </script>

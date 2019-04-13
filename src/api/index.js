@@ -1,18 +1,26 @@
 import request from '@/api/core'
 
-export function getSystemLog (from) {
-  return request('api/getSystemLog', {from}, 'GET')
+export function getSystemLog (timeStamp, from) {
+  return request('/getSystemLog', {timeStamp, from}, 'GET')
 }
 
 export function createTask (iTaskType) {
-  return request('api/createTask', {iTaskType}, 'GET')
+  return request('/createTask', {iTaskType}, 'GET')
 }
 
 export function executeTask (sTaskCode, iTaskType, param) {
   // TODO 添加参数
-  return request('api/executeTask', {sTaskCode, iTaskType}, 'GET')
+  return request('/executeTask', {sTaskCode, iTaskType}, 'GET')
 }
 
-export function getTaskProgress (iTaskType, sTaskCode) {
-  return request('api/getTaskProgress', {iTaskType, sTaskCode}, 'GET')
+export function getTaskProgress (iTaskType, sTaskCode, from) {
+  return request('/getTaskProgress', {iTaskType, sTaskCode, from}, 'GET')
+}
+
+export function getSystemParameter () {
+  return request('/getSystemParameters', {}, 'GET')
+}
+
+export function changeSystemParameter (data) {
+  return request('/changeSystemParameters', {data}, 'GET')
 }

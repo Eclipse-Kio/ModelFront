@@ -1,12 +1,13 @@
 <template>
   <div class="board">
     <el-card>
-      <div slot="header">
+      <div style="color: #ff4f4f;font-weight: bold" slot="header">
         <span>详细日志</span>
         <el-date-picker
           style="margin-left: 50px"
           v-model="timeStamp"
           @change="update"
+          placeholder="请选择日期"
           type="date">
         </el-date-picker>
       </div>
@@ -26,31 +27,48 @@
 
 <script>
 import {getSystemLog} from '@/api/index'
+
 export default {
   name: 'LogBoard',
   data () {
     return {
       timeStamp: new Date(),
       logData: [],
-      loading: true
+      loading: true,
+      from: 0
     }
   },
   methods: {
     update () {
-      alert(this.timeStamp)
+      if (this.timeStamp != null) {
+        this.loading = true
+        this.logData = []
+        this.from = 0
+        this.updateSub()
+      }
+    },
+    updateSub () {
+      getSystemLog(this.timeStamp, this.from).then((data) => {
+        this.logData = data.concat(this.logData)
+        this.loading = false
+        if (data.length !== 0) {
+          this.from = data[0].iId
+        }
+      })
     }
   },
   mounted () {
-    getSystemLog(0).then(data => {
-      this.logData = data
-      this.loading = false
-    })
+    // this.timeStamp = new Date(new Date().getTime() - 24 * 60 * 60 * 1000)// 减掉一天，匹配服务器API
+    console.log(this.timeStamp)
+    this.update()
+    this.timeStamp = new Date()// 将日期选择框设为当前天
+    setInterval(() => this.updateSub(), 5000)
   }
 }
 </script>
 
 <style scoped>
-.board{
-  margin: 10px;
-}
+  .board {
+    margin: 10px;
+  }
 </style>

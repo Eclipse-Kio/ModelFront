@@ -8,7 +8,7 @@
     :router="true"
     active-text-color="#ffd04b">
     <el-menu-item index="/SystemLog"><label class="webIcon">&#xe60f;&nbsp;&nbsp;&nbsp;</label>系统日志</el-menu-item>
-    <el-menu-item index="/SystemParameter"><label class="webIcon">&#xe60f;&nbsp;&nbsp;&nbsp;</label>系统配置</el-menu-item>
+    <el-menu-item index="/SystemParameter"><label style="font-size: 1.2em" class="webIcon">&#xe677;&nbsp;&nbsp;&nbsp;</label>系统配置</el-menu-item>
     <el-submenu index="3">
       <template slot="title"><label class="webIcon">&#xe7ba;&nbsp;&nbsp;&nbsp;</label>{{modelCompute}}</template>
       <el-menu-item index="/Model1" class="text-center">水动力正常扩散模型</el-menu-item>

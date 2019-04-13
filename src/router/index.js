@@ -15,11 +15,15 @@ export default new Router({
     }, {
       path: '/SystemParameter',
       name: 'SystemParameter',
-      component: resolve => require(['@/pages/Model1'], resolve)
+      component: resolve => require(['@/pages/SystemParameter'], resolve)
     }, {
       path: '/Model1',
       name: 'Model1',
       component: resolve => require(['@/pages/Model1'], resolve)
+    }, {
+      path: '/Model2',
+      name: 'Model2',
+      component: resolve => require(['@/pages/Model2'], resolve)
     }, {
       path: '/Model3',
       name: 'Model3',

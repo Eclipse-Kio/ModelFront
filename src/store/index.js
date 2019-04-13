@@ -40,7 +40,6 @@ export default new Vuex.Store({
       state.data[payload.iTaskType - 1].state = payload.state
     },
     resetData (state, iTaskType) {
-      console.log('hell' + iTaskType)
       state.data[iTaskType - 1].sTaskCode = ''
       state.data[iTaskType - 1].response = ''
       state.data[iTaskType - 1].parameters = {}

@@ -43,7 +43,8 @@ export default {
   },
   data () {
     return {
-      loadingCreated: false
+      loadingCreated: false,
+      from: 0
     }
   },
   methods: {
@@ -64,6 +65,8 @@ export default {
           this.$store.commit('updateProgress', {iTaskType: this.tskType, data: 0})
           this.$store.commit('updateTaskCode', {iTaskType: this.tskType, sTaskCode: data.msg})
         }
+      }).catch(() => {
+        this.loadingCreated = false
       })
     },
     executeTask () {
@@ -79,19 +82,19 @@ export default {
           })
           this.$store.commit('updateTaskResult', {iTaskType: this.tskType, data: []}) // 清空原先结果
           this.$store.commit('updateProgress', {iTaskType: this.tskType, data: 0})
+          this.from = 0
           this.updateTaskProgress(this.tskType, this.$store.getters.getData[this.tskType - 1].sTaskCode)
         }
       })
     },
     updateTaskProgress (iTaskType, sTaskCode) {
       setTimeout(() => {
-        getTaskProgress(iTaskType, sTaskCode).then(data => {
+        getTaskProgress(iTaskType, sTaskCode, this.from).then(data => {
           if (data.code === 0) { // 有数据添加
-            console.log(data)
+            this.from = data.stamp
             let current = this.$store.getters.getData[this.tskType - 1].result
-            console.log(current)
-            this.$store.commit('updateTaskResult', {iTaskType: this.tskType, data: current.concat(data.msg)})
             this.$store.commit('updateProgress', {iTaskType: this.tskType, data: data.progress})
+            this.$store.commit('updateTaskResult', {iTaskType: this.tskType, data: current.concat(data.msg)})
             if (!data.isEnd) { // 如果没有结束继续发送请求
               this.updateTaskProgress(iTaskType, sTaskCode)
             } else {
