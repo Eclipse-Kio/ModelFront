@@ -58,7 +58,7 @@ export default {
     }
   },
   mounted () {
-    // this.timeStamp = new Date(new Date().getTime() - 24 * 60 * 60 * 1000)// 减掉一天，匹配服务器API
+    this.timeStamp = new Date(new Date().getTime() - 24 * 60 * 60 * 1000)// 减掉一天，匹配服务器API
     console.log(this.timeStamp)
     this.update()
     this.timeStamp = new Date()// 将日期选择框设为当前天

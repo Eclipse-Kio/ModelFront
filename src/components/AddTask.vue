@@ -76,7 +76,7 @@ export default {
         } else {
           this.$notify({
             title: '成功',
-            message: '任务正在执行中！',
+            message: data.msg,
             type: 'success',
             duration: 2000
           })
@@ -106,13 +106,13 @@ export default {
               })
             }
           } else if (data.code === 1) {
+            this.$store.commit('updateProgress', {iTaskType: this.tskType, data: data.progress})
             this.updateTaskProgress(iTaskType, sTaskCode)
           }
         })
       }, 1000)
     },
     reset () {
-      console.log('press')
       this.$store.commit('resetData', this.tskType)
     }
   }
