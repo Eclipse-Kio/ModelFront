@@ -70,7 +70,9 @@ export default {
       })
     },
     executeTask () {
-      executeTask(this.$store.getters.getData[this.tskType - 1].sTaskCode, this.tskType, {}).then(data => {
+      const parameters = this.$store.getters.getData[this.tskType - 1].parameters
+      console.log(parameters)
+      executeTask(this.$store.getters.getData[this.tskType - 1].sTaskCode, this.tskType, parameters).then(data => {
         if (data.code !== 0) {
           this.$message({message: data.msg, type: 'error'})
         } else {

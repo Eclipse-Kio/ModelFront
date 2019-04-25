@@ -9,8 +9,7 @@ export function createTask (iTaskType) {
 }
 
 export function executeTask (sTaskCode, iTaskType, param) {
-  // TODO 添加参数
-  return request('/executeTask', {sTaskCode, iTaskType}, 'GET')
+  return request('/executeTask', {sTaskCode, iTaskType, param: JSON.stringify(param)}, 'GET')
 }
 
 export function getTaskProgress (iTaskType, sTaskCode, from) {

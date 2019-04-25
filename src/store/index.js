@@ -46,6 +46,9 @@ export default new Vuex.Store({
       state.data[iTaskType - 1].result = []
       state.data[iTaskType - 1].progress = 0
       state.data[iTaskType - 1].state = 0
+    },
+    updateParameters (state, payload) {
+      state.data[payload.iTaskType - 1].parameters = payload.data
     }
   },
   getters: {

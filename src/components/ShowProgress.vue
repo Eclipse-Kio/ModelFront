@@ -7,7 +7,10 @@
     </div>
     <div class="data">
       <div :key="index" v-for="(item,index) in $store.getters.getData[tskType - 1].result">
-        <div v-html="item"></div>
+        <label class="received" style="color: #c00;">
+          {{index+1}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </label>
+          <span v-html="item"></span>
       </div>
     </div>
   </el-card>
